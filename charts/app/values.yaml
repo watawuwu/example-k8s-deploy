@@ -1,0 +1,5 @@
+replicas: 1
+image:
+  repo: asia.gcr.io/{gcp_project}/test/foo-app
+  tag: latest
+

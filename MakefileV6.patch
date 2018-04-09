@@ -1,0 +1,26 @@
+--- MakefileV5.mk	2018-04-09 18:36:26.000000000 +0900
++++ MakefileV6.mk	2018-04-09 18:37:40.000000000 +0900
+@@ -17,10 +17,14 @@ endif
+ 
+ ifeq ($(TAG),)
+   tag := $(shell date +'%Y-%m-%dT%H%M%S')
++  skaffold_option :=
+ else
+   tag := $(TAG)
++  skaffold_option := --tag $(tag)
+ endif
+ 
++
++
+ # Task
+ #===============================================================
+ draft-deploy:
+@@ -28,7 +32,7 @@ draft-deploy:
+ 
+ skaffold-deploy:
+ 	kubectl config use-context $(context)
+-	skaffold run -f $(skaffold_yaml)
++	skaffold run -f $(skaffold_yaml) $(skaffold_option)
+ 
+ plain-deploy: docker-build docker-push helm-apply
+ 

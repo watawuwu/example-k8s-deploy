@@ -1,0 +1,19 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+  - imageName: asia.gcr.io/{gcp_project}/test/foo-app
+    workspace: .
+  local: {}
+deploy:
+  helm:
+    releases:
+    - name: foo-app
+      chartPath: helm
+      namespace: default
+      valuesFilePath: helm/env/stage.yaml
+      values:
+        image: asia.gcr.io/{gcp_project}/test/foo-app
+

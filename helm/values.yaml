@@ -1,0 +1,2 @@
+replicas: 1
+image: asia.gcr.io/{gcp_project}/test/foo-app

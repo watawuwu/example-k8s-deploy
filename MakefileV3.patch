@@ -1,0 +1,13 @@
+--- MakefileV2-2.mk	2018-04-09 18:29:17.000000000 +0900
++++ MakefileV3.mk	2018-04-09 18:30:22.000000000 +0900
+@@ -15,6 +15,10 @@ endif
+ 
+ # Task
+ #===============================================================
++skaffold-deploy:
++	kubectl config use-context $(context)
++	skaffold run
++
+ plain-deploy: docker-build docker-push helm-apply
+ 
+ helm-apply:

@@ -1,0 +1,12 @@
+--- MakefileV3-2.mk	2018-04-09 18:32:41.000000000 +0900
++++ MakefileV4.mk	2018-04-09 18:35:56.000000000 +0900
+@@ -17,6 +17,9 @@ endif
+ 
+ # Task
+ #===============================================================
++draft-deploy:
++	draft --kube-context $(context) up --environment $(ENV)
++
+ skaffold-deploy:
+ 	kubectl config use-context $(context)
+ 	skaffold run -f $(skaffold_yaml)

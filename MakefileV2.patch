@@ -1,0 +1,29 @@
+--- MakefileV1.mk	2018-04-09 18:41:24.000000000 +0900
++++ MakefileV2.mk	2018-04-09 18:40:50.000000000 +0900
+@@ -1,9 +1,18 @@
++# Option
++#===============================================================
++ENV := local
++
+ # Const
+ #===============================================================
+ gcp_project    := {gcp_project}
+ image_repo     := asia.gcr.io/$(gcp_project)/test/foo-app
++context        := docker-for-desktop
+ tag            := $(shell date +'%Y-%m-%dT%H%M%S')
+ 
++ifeq ($(ENV),stage)
++  context := gke_{gcp_project}_asia-northeast1-a_stage-cluster
++endif
++
+ # Task
+ #===============================================================
+ plain-deploy: docker-build docker-push helm-apply
+@@ -11,6 +20,7 @@ plain-deploy: docker-build docker-push h
+ helm-apply:
+ 	helm upgrade --install \
+ 	  --set image.tag=$(tag) \
++	  --kube-context $(context) \
+ 	  foo-app charts/app
+ 
+ docker-build:

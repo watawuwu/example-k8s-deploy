@@ -1,0 +1,30 @@
+--- MakefileV4.mk	2018-04-09 18:35:56.000000000 +0900
++++ MakefileV5.mk	2018-04-09 18:36:26.000000000 +0900
+@@ -1,13 +1,13 @@
+ # Option
+ #===============================================================
+ ENV := local
++TAG :=
+ 
+ # Const
+ #===============================================================
+ gcp_project    := {gcp_project}
+ image_repo     := asia.gcr.io/$(gcp_project)/test/foo-app
+ context        := docker-for-desktop
+-tag            := $(shell date +'%Y-%m-%dT%H%M%S')
+ skaffold_yaml  := skaffold-local.yaml
+ 
+ ifeq ($(ENV),stage)
+@@ -15,6 +15,12 @@ ifeq ($(ENV),stage)
+   skaffold_yaml := skaffold-stage.yaml
+ endif
+ 
++ifeq ($(TAG),)
++  tag := $(shell date +'%Y-%m-%dT%H%M%S')
++else
++  tag := $(TAG)
++endif
++
+ # Task
+ #===============================================================
+ draft-deploy:

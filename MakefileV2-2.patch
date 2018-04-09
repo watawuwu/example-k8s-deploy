@@ -1,0 +1,10 @@
+--- MakefileV2.mk	2018-04-09 17:00:15.000000000 +0900
++++ Makefile	2018-04-09 17:05:27.000000000 +0900
+@@ -20,6 +20,7 @@ helm-apply: .image-tag
+ 	helm upgrade --install \
+ 	  $(helm_options) \
+ 	  --kube-context $(context) \
++	  --values charts/app/env/$(ENV).yaml \
+ 	  foo-app charts/app
+ 
+ docker-build:

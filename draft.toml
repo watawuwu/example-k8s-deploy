@@ -1,0 +1,16 @@
+[environments]
+  [environments.local]
+    name = "foo-app"
+    namespace = "default"
+    wait = false
+    watch = false
+    auto-connect = false
+    registry = "asia.gcr.io/{gcp_project}/test"
+  [environments.stage]
+    name = "foo-app"
+    namespace = "default"
+    wait = false
+    watch = false
+    auto-connect = false
+    registry = "asia.gcr.io/{gcp_project}/test"
+    set = ["replicas=2"]
